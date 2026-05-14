@@ -28,23 +28,23 @@
     ~ current_music = music
     ~ current_sfx = sfx
     <> #BG:{bg} #MUSIC:{music} #SFX:{sfx}
-    ->>
+    ~ return value
 
 // Показать персонажа с нужным состоянием спрайта
 === function show_char(char_id, state) ===
     ~ temp sprite = get_sprite_id(char_id, state)
     <> #CHAR:{char_id} #SPRITE:{sprite}
-    ->>
+    ~ return value
 
 // Скрыть всех персонажей (очистка сцены)
 === function clear_scene_chars() ===
     <> #CHAR:none #SPRITE:none
-    ->>
+    ~ return value
 
 // Быстрая смена локации без пересоздания сцены (для плавных переходов)
 === function transition_to(loc_id, music, sfx) ===
     ~ set_atmosphere(get_bg_id(loc_id), music, sfx)
-    ->>
+    ~ return value
 
 // =============================================================================
 // 🛠️ СИСТЕМНЫЕ ЗАГЛУШКИ (ИНТЕГРАЦИЯ С УРСУЛОЙ)
@@ -54,13 +54,13 @@
     <> [💾 Сохранение...]
     // Урсула автоматически сериализует все VAR и LIST в этот момент
     <> [✅ Прогресс сохранён]
-    ->>
+    ~ return value
 
 === load_game_stub ===
     <> [💾 Загрузка...]
     // Урсула восстанавливает состояние переменных из последнего сейва
     <> [✅ Игра загружена]
-    ->>
+    ~ return value
 
 === settings_stub ===
     <> [⚙️ Настройки]
@@ -68,24 +68,27 @@
     <> • Громкость музыки: 80%
     <> • Громкость SFX: 70%
     <> • Режим окна: Полный экран
-    * [Сохранить настройки] ->>
-    * [Отмена] ->>
+    * [Сохранить настройки]
+        ~ return value
+    * [Отмена] 
+    ~ return value
 
 === quick_menu ===
     <> [⏸️ Пауза]
-    * [Продолжить] ->>
+    * [Продолжить]
+        ~ return value
     * [Сохранить] ~ save_game_stub() -> quick_menu
     * [Загрузить] ~ load_game_stub() -> quick_menu
     * [Настройки] -> settings_stub
     * [В главное меню] -> return_to_menu
-    * [Отладка (Dev)] ~ debug_print_state() -> quick_menu
-    ->>
+    * [Отладка (Dev)] ~ debug_print_state() -> quick_menu    
+    ~ return value
 
 === return_to_menu ===
     <> [⚠️ Выход в главное меню приведёт к потере несохранённого прогресса.]
     * [Подтвердить] -> intro
-    * [Отмена] ->>
-    ->>
+    * [Отмена]
+    ~ return value
 
 // =============================================================================
 // 🐛 ОТЛАДКА И ТЕСТИРОВАНИЕ
@@ -96,7 +99,7 @@
     <> Доверие: {trust_varvara} | Подлинность: {authenticity} | Компромисс: {compromise} | Вовлечённость: {involvement}
     <> Улики: {clues_count}/10 | Голос: {miropiya_voice} | Травма: {past_wound_open}
     <> Дневник: {LIST_COUNT(diary_entries)} записей | Точки: {LIST_COUNT(visited_points)} осмотрено
-    ->>
+    ~ return value
 
 === debug_force_route(route) ===
     { route:
@@ -130,7 +133,8 @@
     <> [🧪 Тест интерфейса]
     * [Открыть дневник] -> view_diary_ui
     * [Открыть карту памяти] -> view_memory_map_ui
-    * [Назад] ->>
+    * [Назад]
+        ~ return value
 
 === view_diary_ui ===
     <> [📖 ДНЕВНИК АЛЕКСЕЯ]
@@ -139,10 +143,10 @@
     - else:
         { diary_entries:
             <> • {diary_entries}
-            <-
         }
     }
-    * [Закрыть] ->>
+    * [Закрыть]
+        ~ return value
 
 === view_memory_map_ui ===
     <> [🗺️ КАРТА ПАМЯТИ ({clues_count}/10)]
@@ -151,11 +155,11 @@
     - else:
         { collected_clues:
             <> • {collected_clues} {collected_clues == clue_river_cross or collected_clues == clue_miropiya_notebook: [✨]}
-            <-
         }
     }
     { clues_count >= 7: <> [⚡ Полная аргументация доступна в финале] }
-    * [Закрыть] ->>
+    * [Закрыть]
+        ~ return value
 
 // =============================================================================
 // ✅ ВАЛИДАЦИЯ И СИНХРОНИЗАЦИЯ СОСТОЯНИЯ
