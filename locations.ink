@@ -166,7 +166,7 @@ LIST locations = road, churchyard, belltower, undercroft, narthex, library, rive
     ~ clues_count = 0
     ~ collected_clues = ()
     <> [🔄 Состояние локаций и улик сброшено]
-    ->>
+    ~ return value
 
 // Синхронизация счётчика улик с размером списка (защита от рассинхрона)
 === function sync_clue_count() ===

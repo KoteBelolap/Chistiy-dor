@@ -109,7 +109,7 @@ LIST characters = alexey, varvara, andrey, egor, miropiya, priest
 === set_sprite(char_id, state)
     ~ temp sprite = get_sprite_id(char_id, state)
     <> #CHAR:{char_id} #SPRITE:{sprite}
-    ->>
+    ~ return value
 
 // Реплика персонажа с автоматической сменой спрайта и форматированием имени
 === say(char_id, state, text)
@@ -124,13 +124,13 @@ LIST characters = alexey, varvara, andrey, egor, miropiya, priest
         - priest: <> Священник: {text}
         - *: <> {char_full_name(char_id)}: {text}
     }
-    ->>
+    ~ return value
 
 // Внутренний монолог Алексея (без смены спрайта, только теги мысли)
 === alexey_thought(text)
     <> #CHAR:alexey #SPRITE:alexey_half_smile
     <> Алексей (мысль): {text}
-    ->>
+    ~ return value
 
 // Реплика без смены спрайта (если персонаж уже стоит на сцене)
 === say_still(char_id, text)
@@ -144,8 +144,7 @@ LIST characters = alexey, varvara, andrey, egor, miropiya, priest
         - priest: <> Священник: {text}
         - *: <> {char_full_name(char_id)}: {text}
     }
-    ->>
-
+    ~ return value
 // =============================================================================
 // 🔍 ПРОВЕРКИ ДОСТУПНОСТИ РЕПЛИК И ВЕТОК
 // Связаны с переменными из main.ink

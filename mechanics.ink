@@ -15,8 +15,8 @@
 
 // Безопасное ограничение значения диапазоном [min, max]
 === function clamp(val, min, max) ===
-    { val < min: ~ return min }
-    { val > max: ~ return max }
+    { val < min: return min }
+    { val > max: return max }
     ~ return val
 
 // =============================================================================
@@ -33,7 +33,7 @@
         - "trust_varvara": ~ trust_varvara = clamp(trust_varvara + delta, 0, 6)
     }
     <> [📈 {axis}: {delta >= 0 ? "+"}{delta}]
-    ->>
+    ~ return value
 
 // Получить текущий уровень оси текстом (для отладки или скрытых проверок)
 === function get_axis_level(value) ===
@@ -71,7 +71,7 @@
         { amount > 0: <> [💚 Доверие Варвары выросло] | <> [💔 Доверие Варвары снизилось] }
         ~ diary_add(context_label, "Уровень доверия с Варварой: {get_axis_level(trust_varvara)}")
     }
-    ->>
+    ~ return value
 
 // =============================================================================
 // 🔍 КАРТА ПАМЯТИ И УЛИКИ
@@ -107,13 +107,13 @@
     - else:
         { collected_clues:
             <> • {collected_clues} {LIST_COUNT(collected_clues) >= 7: [⚡ Ключевое]}
-            <-
         }
     }
     { clues_count >= 7:
         <> [⚡ Доступна полная аргументация в финальном выборе]
     }
-    * [Закрыть карту] ->>
+    * [Закрыть карту] 
+        ~ return value
 
 // =============================================================================
 // 📖 ДНЕВНИК АЛЕКСЕЯ
@@ -124,7 +124,7 @@
     ~ diary_entries += "[{label}] {text}"
     // Вывод в консоль/экран только в отладке или при явном вызове
     // { debug_mode == true: <> [📓 {label}: {text}] }
-    ->>
+    ~ return value
 
 // Показать последние N записей
 // Исправлено: убран несуществующий индекс i, используется счетчик idx
@@ -139,10 +139,10 @@
         { diary_entries:
             { idx >= start: <> • {diary_entries} }
             ~ idx += 1
-            <-
         }
     }
-    * [Закрыть] ->>
+    * [Закрыть]
+        ~ return value
 
 // Записать профессиональную или личную рефлексию (автоматически определяет тип)
 === function diary_reflect(text, is_personal) ===
@@ -251,7 +251,7 @@
     ~ diary_entries = ()
     ~ visited_points = ()
     <> [🔄 Механики сброшены]
-    ->>
+    ~ return value
 
 // Показать текущее состояние переменных (для отладки)
 === function debug_print_state() ===
