@@ -4,7 +4,6 @@
 // Платформа: Урсула (Ink)
 // ============================================================
 INCLUDE characters.ink
-INCLUDE locations.ink
 
 // === ПЕРЕМЕННЫЕ ===
 VAR trust_varvara = 0
