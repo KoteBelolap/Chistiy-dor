@@ -187,7 +187,7 @@ VAR explore_count = 0
 // ============================================================
 
 === I_02_explore ===
-#Location: двор Никольской церкви
+#Location: Двор Никольской церкви
 Что осмотреть?
 
 * {not explored_facade} [Фасад]
@@ -1036,18 +1036,7 @@ VAR explore_count = 0
 // MECHANIC: перед выбором игра показывает «Карту памяти»
 #Location: Карта памяти
 // Показ карты памяти
-Карта памяти:
-{clue_false_clock: ✦ Ложные часы 17:17}
-{clue_old_paint: ✦ След синей краски}
-{clue_hidden_door: ✦ След старого дверного проёма}
-{clue_hidden_door_hint && not clue_hidden_door: ○ Подозрение на скрытый проём}
-{clue_school_1884: ✦ Школа 1884 года}
-{clue_school_1897: ✦ Здание школы 1897 года}
-{clue_library_books: ✦ Список старых книг}
-{clue_miropiya_notebook: ✦ Тетрадь Миропии}
-{clue_iconostasis_hint: ✦ Фрагмент иконостаса}
-{clue_egor_testimony: ✦ Рассказ Егора Фомича}
-{clue_river_cross: ✦ Крест из воды}
+Состав вашей карты памяти – {clue_false_clock: ✦ Ложные часы 17:17}, {clue_old_paint: ✦ След синей краски}, {clue_hidden_door: ✦ След старого дверного проёма}, {clue_hidden_door_hint && not clue_hidden_door: ○ Подозрение на скрытый проём}, {clue_school_1884: ✦ Школа 1884 года}, {clue_school_1897: ✦ Здание школы 1897 года}, {clue_library_books: ✦ Список старых книг}, {clue_miropiya_notebook: ✦ Тетрадь Миропии}, {clue_iconostasis_hint: ✦ Фрагмент иконостаса}, {clue_egor_testimony: ✦ Рассказ Егора Фомича}, {clue_river_cross: ✦ Крест из воды}
 
 {clues_count < 5:
     У меня слишком мало находок, но решение всё равно требуется.
