@@ -214,7 +214,6 @@ VAR explore_count = 0
     -> I_03
 
 === explore_facade ===
-#Location: Фасад
 ~ explored_facade = true
 ~ explore_count += 1
 ~ clue_hidden_door_hint = true
